@@ -8,6 +8,7 @@ console.log(els);
 const baseUrl = "http://localhost:5000";
 
 const postsUrl = `${baseUrl}/posts`;
+// const deletePostsUrl = `${baseUrl}/posts`;
 
 // sukurti funkcija kuri parsiunia ir iskonsolina visus postus
 init();
@@ -29,6 +30,8 @@ async function getAllPosts() {
 }
 
 function makePostsHtml(arr) {
+  // isvalyti konteineri pries generuojant
+  els.postListEl.innerHTML = "";
   arr.forEach((postObj) => {
     // sukuriame viena html elementa
     const singlePostEl = createSinglePosteEl(postObj);
@@ -41,21 +44,57 @@ function createSinglePosteEl(singlePosteObj) {
   const liEl = document.createElement("li");
   const innerDiv = `
   <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">${singlePosteObj.title}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary"> ${
-              singlePosteObj.author
-            } </h6>
-            <p class="card-text">${singlePosteObj.body.slice(0, 75)}... </p>
-            <a href="single-post.html" class="card-link btn btn-primary">Read more</a>
-
-          </div>
-        </div>
+    <div class="card-header"> Id: ${singlePosteObj.id} 
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${singlePosteObj.title}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary"> ${
+        singlePosteObj.author
+      } </h6>
+      <p class="card-text">${singlePosteObj.body.slice(0, 75)}... </p>
+      <a href="single-post.html" class="card-link btn btn-primary">Read more</a>
+    </div>
+  </div>
   `;
   liEl.innerHTML = innerDiv;
+  // sukurkime mygtuka delete
+  const deleteBtnEl = document.createElement("button");
+  deleteBtnEl.textContent = "Delete";
+  deleteBtnEl.classList.add("btn", "btn-outline-danger");
+  deleteBtnEl.addEventListener("click", () =>
+    sendDeleteFetch(singlePosteObj.id)
+  );
+  const cartBody = liEl.querySelector(".card-body");
+  cartBody.append(deleteBtnEl);
   return liEl;
 }
 
+function sendDeleteFetch(idToDelete) {
+  console.log("deleting post", idToDelete);
+  // istrinimo mechanizmas daryti fetch su delete mechanizmu
+  fetch(`${postsUrl}/${idToDelete} `, {
+    method: "DELETE",
+  })
+    .then((resp) => {
+      // istrinti pavyko
+      if (resp.status === 200) {
+        console.log("strinti pavyko");
+        // atnaujiname sarasa
+        init();
+      } else {
+        // istrinti nepavyko
+        console.log("strinti nepavyko");
+      }
+
+      return resp.json();
+    })
+    .then((rez) => {
+      console.log("rez ===", rez);
+    })
+    .catch((error) => {
+      console.log("error ===", error);
+    });
+}
 // sugeneruoti postus htmle
 
 // async function generateHTML() {
