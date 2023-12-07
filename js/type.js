@@ -8,3 +8,7 @@ const signePost = {
   tags: ["CSS", "Grid Layout"],
   date: "2022-01-09",
 };
+
+// Specialu buda gauti visus keys, values arba abu
+
+Object.keys(signePost);

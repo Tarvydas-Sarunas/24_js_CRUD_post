@@ -1,121 +1,100 @@
 "use strict";
 console.log("main.js file was loaded");
 
+const baseUrl = "http://localhost:5000";
+const postsUrl = `${baseUrl}/posts`;
+
+// sukurti funkcija kuri parsiunia ir iskonsolina visus postus
 const els = {
   postListEl: document.getElementById("postList"),
 };
-console.log(els);
-const baseUrl = "http://localhost:5000";
+console.log("els ===", els);
 
-const postsUrl = `${baseUrl}/posts`;
-// const deletePostsUrl = `${baseUrl}/posts`;
-
-// sukurti funkcija kuri parsiunia ir iskonsolina visus postus
 init();
 async function init() {
   let mainPostsArr = await getAllPosts();
   console.log("mainPostsArr ===", mainPostsArr);
+  // console.log(JSON.stringify(mainPostsArr[0]));
   makePostsHtml(mainPostsArr);
 }
 
-async function getAllPosts() {
-  try {
-    const resp = await fetch(postsUrl);
-    const posts = await resp.json();
-    console.log("posts ===", posts);
-    return posts;
-  } catch (error) {
-    console.warn(error);
-  }
+function getAllPosts() {
+  return fetch(postsUrl)
+    .then((resp) => resp.json())
+    .then((postsArr) => {
+      // console.log('postsArr ===', postsArr);
+      return postsArr;
+    })
+    .catch((error) => {
+      console.warn("ivyko klaida:", error);
+    });
 }
 
+// sugeneruoti postus htmle
 function makePostsHtml(arr) {
   // isvalyti konteineri pries generuojant
   els.postListEl.innerHTML = "";
   arr.forEach((postObj) => {
-    // sukuriame viena html elementa
-    const singlePostEl = createSinglePosteEl(postObj);
+    // sukuriam viena post html el
+    const siglePostEl = createSinglePostEl(postObj);
+    // console.log('siglePostEl ===', siglePostEl);
     // deti i sarasa
-    els.postListEl.append(singlePostEl);
+    els.postListEl.append(siglePostEl);
   });
 }
 
-function createSinglePosteEl(singlePosteObj) {
+function createSinglePostEl(singlePostObj) {
   const liEl = document.createElement("li");
   const innerDiv = `
-  <div class="card">
-    <div class="card-header"> Id: ${singlePosteObj.id} 
+    <div class="card">
+      <div class="card-header">
+        id: ${singlePostObj.id}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">${singlePostObj.title}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">${
+          singlePostObj.author
+        }</h6>
+        <p class="card-text">${singlePostObj.body.slice(0, 75)}...</p>
+        <a href="single-poste.html?postId=${
+          singlePostObj.id
+        }" class="btn btn-primary card-link">Read more</a>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">${singlePosteObj.title}</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary"> ${
-        singlePosteObj.author
-      } </h6>
-      <p class="card-text">${singlePosteObj.body.slice(0, 75)}... </p>
-      <a href="single-post.html" class="card-link btn btn-primary">Read more</a>
-    </div>
-  </div>
   `;
   liEl.innerHTML = innerDiv;
-  // sukurkime mygtuka delete
+  // sukurti mygtuka delete
   const deleteBtnEl = document.createElement("button");
-  deleteBtnEl.textContent = "Delete";
   deleteBtnEl.classList.add("btn", "btn-outline-danger");
+  deleteBtnEl.textContent = "Delete";
+
   deleteBtnEl.addEventListener("click", () =>
-    sendDeleteFetch(singlePosteObj.id)
+    sendDeleteFetch(singlePostObj.id)
   );
-  const cartBody = liEl.querySelector(".card-body");
-  cartBody.append(deleteBtnEl);
+  liEl.querySelector(".card-body").append(deleteBtnEl);
+
   return liEl;
 }
 
 function sendDeleteFetch(idToDelete) {
   console.log("deleting post", idToDelete);
-  // istrinimo mechanizmas daryti fetch su delete mechanizmu
-  fetch(`${postsUrl}/${idToDelete} `, {
+  // fetch su metodu delete
+  fetch(`${postsUrl}/${idToDelete}`, {
     method: "DELETE",
   })
     .then((resp) => {
-      // istrinti pavyko
+      console.log("resp ===", resp);
       if (resp.status === 200) {
-        console.log("strinti pavyko");
-        // atnaujiname sarasa
+        // istrinti pavyko
+        console.log("// istrinti pavyko");
+        // atnaujinam sarasa
         init();
       } else {
         // istrinti nepavyko
-        console.log("strinti nepavyko");
+        console.log("// istrinti nepavyko");
       }
-
-      return resp.json();
-    })
-    .then((rez) => {
-      console.log("rez ===", rez);
     })
     .catch((error) => {
-      console.log("error ===", error);
+      console.warn("ivyko klaida deleting:", error);
     });
 }
-// sugeneruoti postus htmle
-
-// async function generateHTML() {
-//   let postsUrl = await getAllPosts();
-
-//   postsUrl.forEach((obj) => {
-//     const newLi = document.createElement("li");
-//     postListEl.append(newLi);
-//     const cardDiv = document.createElement("div");
-//     const cardBodyDiv = document.createElement("div");
-//     newLi.append(cardDiv);
-//     cardDiv.append(cardBodyDiv);
-//     const h5El = document.createElement("h5");
-//     h5El.textContent = obj.title;
-//     const h6El = document.createElement("h6");
-//     h6El.textContent = obj.author;
-//     const pEl = document.createElement("p");
-//     pEl.textContent = obj.body;
-//     const aEl = document.createElement("a");
-//     aEl.textContent = "Read More";
-//     cardBodyDiv.append(h5El, h6El, pEl, aEl);
-//   });
-// }
-// generateHTML();

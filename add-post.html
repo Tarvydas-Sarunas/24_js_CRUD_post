@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADD Post</title>
+  <!-- Boot css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Boot js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="main.css">
+  <script src="js/addPost.js" defer></script>
+</head>
+
+<body>
+  <!-- navigacija -->
+
+  <nav class="navbar navbar-expand-sm bg-body-tertiary " data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">Posts<strong>CRUD</strong> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/index.html">Home</a>
+          <a class="nav-link active" href="add-post.html">Add post</a>
+          <a class="nav-link" href="about.html">About</a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- /navigacija -->
+
+
+  <div class="container mb-5 mt-2">
+    <h1 class="display-2">Add post</h1>
+
+    <form>
+      <div id="alert" class="alert d-none alert-warning alert-dismissible fade show" role="alert">
+        <strong>Formoje yra klaidu.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Title">
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image Url</label>
+        <input type="text" class="form-control" id="image" image="image" placeholder="Image url">
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" author="author" placeholder="Author">
+      </div>
+
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" date="date" placeholder="Date">
+      </div>
+      <div class="mb-3">
+        <label for="tags" class="form-label">Tags</label>
+        <input type="tags" class="form-control" id="tags" tags="tags" placeholder="Tags">
+      </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <input type="text" class="form-control" id="body" title="body" placeholder="Body">
+      </div>
+      <ul id="errorList" class="text-danger">
+        <li></li>
+      </ul>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+  <!-- ddff -->
+</body>
+
+</html>
