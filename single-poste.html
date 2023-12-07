@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Single post</title>
+  <!-- Boot css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Boot js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="main.css">
+  <script src="js/single.js" defer></script>
+</head>
+
+<body>
+  <!-- navigacija -->
+  <nav class="navbar navbar-expand-sm bg-body-tertiary " data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">Posts<strong>CRUD</strong> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" href="#">Single</a>
+          <a class="nav-link" href="/index.html">Home</a>
+          <a class="nav-link" href="add-post.html">Add post</a>
+          <a class="nav-link" href="about.html">About</a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- /navigacija -->
+
+  <div class="container mb-5 mt-2">
+    <h1 id="title" class="display-2">Single post</h1>
+    <img id="image" class="img-fluid border p-2 mb-3" src="https://picsum.photos/id/7/800/400" alt="post title">
+    <p class="lead">Authorius: <span id="author"></span></p>
+    <p class="fz2">Data: <span id="date"></span></p>
+    <h3>Tags:</h3>
+    <ul id="tags" class="unlisted">
+      <li class="badge rounded-pill text-bg-success fs-5">Html</li>
+      <li class="badge rounded-pill text-bg-success fs-5">Css</li>
+      <li class="badge rounded-pill text-bg-success fs-5">Js</li>
+    </ul>
+    <p id="body"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, eveniet. Vitae laudantium voluptatibus
+      recusandae repellendus nostrum laborum eligendi maiores, accusamus impedit, mollitia quisquam corporis, quo iure
+      magni doloribus iste magnam beatae? Temporibus nam, iure, cum eum, natus ab voluptatem quos distinctio facilis
+      minima reprehenderit sit nobis ducimus dolor ratione consequuntur exercitationem. Hic ullam ducimus cupiditate
+      itaque fuga fugiat vitae unde, excepturi voluptatem aspernatur soluta alias minima quae ut sunt tempore dolorem
+      rerum enim, corrupti nihil? Nihil facere et earum ratione dolore nobis adipisci corporis eveniet itaque non id,
+      quo unde omnis porro, deserunt cupiditate quos incidunt rerum. Nulla officiis temporibus quos molestias ipsum
+      eligendi fuga, necessitatibus perspiciatis sequi voluptas aut obcaecati. Quaerat maiores cum quo necessitatibus
+      obcaecati molestias eaque laboriosam magnam, ratione, reiciendis modi illum harum dolorem sed aut sint nostrum ut.
+      Ratione, sequi nostrum? Natus libero voluptas est accusantium aperiam, eaque, id alias iure tenetur tempora,
+      officiis repellendus voluptatibus commodi dolore enim nesciunt temporibus consequatur dolorum. Doloribus
+      asperiores libero maxime, tenetur adipisci delectus ducimus esse ipsum fugiat earum similique cumque, voluptatum,
+      iusto voluptates enim saepe molestiae omnis perspiciatis et provident odit? Voluptatem modi officiis debitis eaque
+      eveniet aliquam impedit nulla assumenda libero provident earum non harum, ducimus adipisci eius!</p>
+    <button class="btn btn-danger">Delete</button>
+    <a href="/index.html" class="btn btn-secondary">Go back</a>
+    <a id="editThisPost" href="/edit-post.html" class="btn btn-info">Edit this post</a>
+  </div>
+</body>
+
+</html>
